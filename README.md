@@ -23,5 +23,5 @@ Use ChatGPT on Telegram.
 5. 在 Telegram 上使用 ChatGPT
 
 ## 机器人命令
-- `/start` - 重置聊天
+- `/start` - 重置对话
 - `/set_access_token <accessToken>` - 设置 Access token
