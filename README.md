@@ -8,6 +8,10 @@ Use ChatGPT on Telegram.
 4. `https://chat.openai.com/api/auth/session` gets the Access token, and sends `/set_access_token <accessToken>` to the bot
 5. Use ChatGPT on Telegram
 
+## Bot commands
+- `/start` - Reset chat
+- `/set_access_token <accessToken>` - Set access token
+
 # chatgpt-telegram-bot
 在 Telegram 上使用 ChatGPT。
 
@@ -17,3 +21,7 @@ Use ChatGPT on Telegram.
 3. 运行`python main.py`
 4. `https://chat.openai.com/api/auth/session`获取 Access token，向 bot 发送`/set_access_token <accessToken>`
 5. 在 Telegram 上使用 ChatGPT
+
+## 机器人命令
+- `/start` - 重置聊天
+- `/set_access_token <accessToken>` - 设置 Access token
