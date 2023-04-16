@@ -9,20 +9,15 @@ chatgpt_api_url = ""  # Optional 可选
 """===== ChatGPT ====="""
 from revChatGPT.V1 import Chatbot
 
-bot = Chatbot(config={"access_token": ""}, base_url=chatgpt_api_url)
-
-
-def set_access_token(access_token):
-    bot.set_access_token(access_token)
-
-
-def reset_chat():
-    bot.reset_chat()
+chat_bot = Chatbot(
+    config={"access_token": ""},
+    base_url=chatgpt_api_url or "https://api.pawan.krd/backend-api/",
+)
 
 
 def get_reply_stream(prompt):
     prev_text = ""
-    for data in bot.ask(prompt):
+    for data in chat_bot.ask(prompt):
         prev_text = data["message"]
         yield False, prev_text
     yield True, prev_text
@@ -43,13 +38,15 @@ from telegram.ext import (
 )
 from telegram.constants import ParseMode
 
+need_set_access_token = True
+
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
 )
 
 
 async def reset_reply(reply_message):
-    reset_chat()
+    chat_bot.reset_chat()
     await reply_message(text="An error occurred.\nConversation has been reset.")
 
 
@@ -62,7 +59,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(text="Please set access token first.")
         return
 
-    reset_chat()
+    chat_bot.reset_chat()
     await reset_reply(update.message.reply_text)
 
 
@@ -118,7 +115,7 @@ async def set_access_token(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     try:
         access_token = update.message.text.split(" ")[1]
-        set_access_token(access_token)
+        chat_bot.set_access_token(access_token)
         global need_set_access_token
         need_set_access_token = False
         await update.message.reply_text(text="Access token set.")
