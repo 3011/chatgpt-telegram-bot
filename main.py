@@ -11,7 +11,7 @@ from revChatGPT.V1 import Chatbot
 
 chat_bot = Chatbot(
     config={"access_token": ""},
-    base_url=chatgpt_api_url or "https://chat.gateway.do/api/",
+    base_url=chatgpt_api_url or "https://ai.fakeopen.com/api/",
 )
 
 
